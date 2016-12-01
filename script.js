@@ -33,6 +33,7 @@ function init() {
         });
     //select();
     temperatureChange();
+    barChartInit();
 
 
 }
@@ -40,8 +41,8 @@ function init() {
 function temperatureChange() {
     // set the dimensions and margins of the graph
 
-    var svg = d3.select("svg"),
-        margin = { top: 20, right: 100, bottom: 30, left: 50 },
+    var svg = d3.select(".multiLine svg"),
+        margin = { top: 20, right: 20, bottom: 100, left: 50 },
         width = +svg.attr("width") - margin.left - margin.right,
         height = +svg.attr("height") - margin.top - margin.bottom,
         g = svg.append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
@@ -68,31 +69,24 @@ function temperatureChange() {
 
             x.domain(d3.extent(new Array(12), function (d, i) { return i; }));
             y.domain(d3.extent([-10, 20], function (d) { return d; }));
-            console.log(d3.extent(new Array(12), function (d, i) { return i; }));
 
             var monthNames = ["January", "February", "March", "April", "May", "June",
                 "July", "August", "September", "October", "November", "December"
             ];
-
-            g.append("g")
-                .selectAll('text')
-                .data(monthNames)
-                .enter()
-                .append("text")
-                .attr("x", function(d, i) {
-                    return x(i);
-                })
-                .attr("y", y(-10))
-                .text(function (d, i) {
-                    console.log(d);
-                    return d
-                });
-
+            var formatMonth = function(d) {
+                return monthNames[d]
+            }
 
             g.append("g")
                 .attr("class", "axis axis--x")
                 .attr("transform", "translate(0," + height + ")")
-                .call(d3.axisBottom(x));
+                .call(d3.axisBottom(x).tickFormat(formatMonth))
+                .selectAll("text")
+                .attr("y", 0)
+                .attr("x", 10)
+                .attr("dy", ".35em")
+                .attr("transform", "rotate(90)")
+                .style("text-anchor", "start");
 
             g.append("g")
                 .attr("class", "axis axis--y")
@@ -112,15 +106,10 @@ function temperatureChange() {
                 months = Object.keys(year).splice(1, 12);
                 months.forEach(function (month, i) {
                     newData.push({
-                        "month": i,
+                        "month": i ,
                         "temp": parseFloat(year[month])
                     });
                 });
-
-                console.log(data.length);
-                var colorScale = d3.scaleLinear()
-                    .domain([0, data.length])
-                    .range(['#ff0', "#eeff00"]);
 
                 color = d3.scaleLinear().domain([1, data.length])
                     .interpolate(d3.interpolateHcl)
@@ -137,3 +126,66 @@ function temperatureChange() {
         });
 }
 
+function barChartInit() {
+    var svg = d3.select(".barChart svg"),
+        margin = {top: 20, right: 20, bottom: 40, left: 50},
+        width = +svg.attr("width") - margin.left - margin.right,
+        height = +svg.attr("height") - margin.top - margin.bottom;
+
+    var x = d3.scaleBand().rangeRound([0, width]).padding(0.1),
+        y = d3.scaleLinear().rangeRound([height, 0]);
+
+    var g = svg.append("g")
+        .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+    d3.tsv("data.tsv", function (d) {
+        d.metANN = +d.metANN;
+        return d;
+    }, function (error, data) {
+        if (error) throw error;
+
+        x.domain(data.map(function (d) {
+            return d.YEAR;
+        }));
+        y.domain([0, d3.max(data, function (d) {
+            return d.metANN;
+        })]);
+
+        g.append("g")
+            .attr("class", "axis axis--x")
+            .attr("transform", "translate(0," + height + ")")
+            .call(d3.axisBottom(x))
+            .selectAll("text")
+            .attr("y", 0)
+            .attr("x", 5)
+            .attr("dy", ".35em")
+            .attr("transform", "rotate(90)")
+            .style("text-anchor", "start");
+
+        g.append("g")
+            .attr("class", "axis axis--y")
+            .call(d3.axisLeft(y).ticks(10, "r"))
+            .append("text")
+            .attr("fill", "#000")
+            .attr("transform", "rotate(-90)")
+            .attr("y", 6)
+            .attr("dy", "0.71em")
+            .style("text-anchor", "end")
+            .text("Degree");
+
+        g.selectAll(".bar")
+            .data(data)
+            .enter().append("rect")
+            .attr("class", "bar")
+            .attr("x", function (d) {
+                return x(d.YEAR);
+            })
+            .attr("y", function (d) {
+                return y(d.metANN);
+            })
+            .attr("width", x.bandwidth())
+            .attr("height", function (d) {
+                return height - y(d.metANN);
+            });
+    });
+}
