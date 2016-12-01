@@ -1,0 +1,16 @@
+{
+  "name": "assignment_1",
+  "version": "1.0.0",
+  "description": "Interactive Data Visualisation",
+  "main": "script.js",
+  "dependencies": {
+    "@types/d3": "^4.3.0",
+    "d3": "^4.4.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Theis",
+  "license": "ISC"
+}
