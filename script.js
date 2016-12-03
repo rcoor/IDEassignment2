@@ -65,22 +65,23 @@ function temperatureChange() {
             data.pop();
             data.pop();
             data.pop();
+
+
             if (error) throw error;
 
+            // Set domain of x and y
             x.domain(d3.extent(new Array(12), function (d, i) { return i; }));
             y.domain(d3.extent([-10, 20], function (d) { return d; }));
 
             var monthNames = ["January", "February", "March", "April", "May", "June",
                 "July", "August", "September", "October", "November", "December"
             ];
-            var formatMonth = function(d) {
-                return monthNames[d]
-            }
 
+            // Append the x-axis
             g.append("g")
                 .attr("class", "axis axis--x")
                 .attr("transform", "translate(0," + height + ")")
-                .call(d3.axisBottom(x).tickFormat(formatMonth))
+                .call(d3.axisBottom(x).tickFormat((i) => monthNames[i])) // lambda function
                 .selectAll("text")
                 .attr("y", 0)
                 .attr("x", 10)
@@ -88,6 +89,7 @@ function temperatureChange() {
                 .attr("transform", "rotate(90)")
                 .style("text-anchor", "start");
 
+            // Append the y-axis
             g.append("g")
                 .attr("class", "axis axis--y")
                 .call(d3.axisLeft(y))
@@ -99,36 +101,46 @@ function temperatureChange() {
                 .style("text-anchor", "end")
                 .text("Temperature");
 
-            var i = 0;
-            data.forEach(function (year) {
-                var newData = [];
+            // Create color scale scheme
+            var color = d3.scaleLinear().domain([1, data.length])
+                .interpolate(d3.interpolateHcl)
+                .range([d3.rgb("#0026ff"), d3.rgb('#ffff00')]);
 
-                months = Object.keys(year).splice(1, 12);
-                months.forEach(function (month, i) {
-                    newData.push({
-                        "month": i ,
-                        "temp": parseFloat(year[month])
-                    });
-                });
-
-                color = d3.scaleLinear().domain([1, data.length])
-                    .interpolate(d3.interpolateHcl)
-                    .range([d3.rgb("#0026ff"), d3.rgb('#ffff00')]);
-
+              // Plot each line by using callback filtered data. Each callback represents one line.
+            createLines(data, function (newData, i) {
                 g.append("path")
                     .datum(newData)
                     .attr("class", "line")
                     .attr("d", line)
                     .style("stroke", color(i));
-                i += 1;
             });
 
+            // Function for looping through object in the data and emit
+            // each year as an array of objects with month and temperature.
+            function createLines(data, callback) {
+                var i = 0;
+                data.forEach(function (year) {
+                    var newData = [];
+
+                    months = Object.keys(year).splice(1, 12);
+                    months.forEach(function (month, i) {
+                        newData.push({
+                            "month": i,
+                            "temp": parseFloat(year[month])
+                        });
+                    });
+
+                    callback(newData, i);
+                    i += 1;
+                });
+            }
         });
 }
 
+// Barchart
 function barChartInit() {
     var svg = d3.select(".barChart svg"),
-        margin = {top: 20, right: 20, bottom: 40, left: 50},
+        margin = { top: 20, right: 20, bottom: 40, left: 50 },
         width = +svg.attr("width") - margin.left - margin.right,
         height = +svg.attr("height") - margin.top - margin.bottom;
 
