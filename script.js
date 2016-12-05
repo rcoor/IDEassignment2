@@ -71,7 +71,7 @@ function temperatureChange() {
 
             // Set domain of x and y
             x.domain(d3.extent(new Array(12), function (d, i) { return i; }));
-            y.domain(d3.extent([-10, 20], function (d) { return d; }));
+            y.domain(d3.extent([-7, 25], function (d) { return d; }));
 
             var monthNames = ["January", "February", "March", "April", "May", "June",
                 "July", "August", "September", "October", "November", "December"
@@ -106,7 +106,7 @@ function temperatureChange() {
                 .interpolate(d3.interpolateHcl)
                 .range([d3.rgb("#0026ff"), d3.rgb('#ffff00')]);
 
-              // Plot each line by using callback filtered data. Each callback represents one line.
+            // Plot each line by using callback filtered data. Each callback represents one line.
             createLines(data, function (newData, i) {
                 g.append("path")
                     .datum(newData)
@@ -138,6 +138,7 @@ function temperatureChange() {
 }
 
 // Barchart
+
 function barChartInit() {
     var svg = d3.select(".barChart svg"),
         margin = { top: 20, right: 20, bottom: 40, left: 50 },
@@ -163,6 +164,7 @@ function barChartInit() {
             return d.metANN;
         })]);
 
+
         g.append("g")
             .attr("class", "axis axis--x")
             .attr("transform", "translate(0," + height + ")")
@@ -185,19 +187,39 @@ function barChartInit() {
             .style("text-anchor", "end")
             .text("Degree");
 
+        // Create color scale scheme
+        var color = d3.scaleLinear().domain([1, data.length])
+            .interpolate(d3.interpolateHcl)
+            .range([d3.rgb("#0026ff"), d3.rgb('#ffff00')]);
+
+        console.log(getMinMaxAndMean(data));
         g.selectAll(".bar")
             .data(data)
             .enter().append("rect")
-            .attr("class", "bar")
-            .attr("x", function (d) {
-                return x(d.YEAR);
+            .style("fill", (d, i) => {
+                return d.metANN > getMinMaxAndMean(data)[2] ? color(120) : color(0);
+
             })
-            .attr("y", function (d) {
-                return y(d.metANN);
-            })
+            .attr("x", (d) => x(d.YEAR))
+            .attr("y", (d) => y(d.metANN))
+
             .attr("width", x.bandwidth())
             .attr("height", function (d) {
                 return height - y(d.metANN);
             });
     });
 }
+
+// get minimum and maximum of array
+function getMinMaxAndMean(data) {
+    var arr = [];
+    data.forEach(year => {
+        arr.push(year.metANN);
+    });
+    return [Math.min(...arr), Math.max(...arr), arr.reduce(add, 0) / arr.length];
+}
+
+function add(a, b) {
+    return a + b;
+}
+
