@@ -95,23 +95,32 @@
         </p>
     </div>
 
-    <!-- Results here-->
-    The bar plot gives a good overview on how the overall changes in temperature per year has changed. There are a general pattern
-    of increasing temperatures, however it is hard to tell if the changes are more significant, since maybe the cold months
-    are getting colder and the warm months are getting warmer.
-
     <h3>Multi line plot</h3>
     <div class="multiLine">
         <svg width="600" height="600"></svg>
     </div>
-    <div class="temperature">
-
-    </div>
+    <p>The multiline plot has been used to show temperatures for each month from the year 1880 to 2015. Each line represents
+        a year. Each line has been given a color on a d3 color scheme that goes from blue, the year 1880, to yellow, the
+        year 2015. This was to illustrate a likely correlation of the year and rise in temperature. </p>
 
     <!-- Results here-->
 
     <div style="width: 600px;">
         <h2>Conclusion</h2>
+        <h3>Bar plot</h3>
+        <p>
+            The bar plot gives a good overview on how the overall changes in temperature per year has changed. There are a general pattern
+            of increasing temperatures, however it is hard to tell if the changes are more significant, since maybe the cold
+            months are getting colder and the warm months are getting warmer.
+        </p>
+        <h3>Multiline plot</h3>
+        <p>
+            In a sense the multiline plot is biased towards indicating that there is a temperature increase due to the color scheme chosen.
+            The plot has been drawn by starting at the year 1880 and continuing until 2015, which results in earlier years
+            being overwritten by the yellow color of newer years. In general it's hard to see what is actually going on and
+            to infer anything meaningful. Improvements to the plot, see individual answers, might yield a different visual
+            result.
+        </p>
 
         <h2>Individual part</h2>
         <br>
@@ -120,7 +129,11 @@
         <p>
             From the data plottet in the bar-plot we can visually infer that there is a rise in temperature over last decade. This is
             alone only clearly visible due to the color categorization of the bars. It is however not clearly visible if
-            there is a gradual rise in temperature over the last century. A dataset containing a distance to a mean temperature before a certain date would make it easier to determine
+            there is a gradual rise in temperature over the last century. A dataset containing a distance to a mean temperature
+            before a certain date would make it easier to determine temperature shifts. Such a dataset, ofcourse, could be
+            obtained by transforming the current dataset. Errors on each temperature measurement would also be welcome. Right
+            now the multiline plot is very cluttered. It's hard to see differences between the years that have been plotted.
+            Using the same method, as describe before, for the multine and the barplot would improve it's message.
         </p>
         <h3>Question 2</h3>
         <small>Christian Grüner</small>
@@ -132,7 +145,16 @@
         <h3>Question 3</h3>
         <small>Theis Jakobsen</small>
         <p>
-
+            There are a few limiting factors to working with large data. Firstly we have to consider the file size and the bandwidth
+            of the client and the server. There work that has to be done on the data will also have it's limitations and
+            lastly the data will need to be rendered. Inheritely it does not seem like that there is a specific file size
+            limit on creating d3 visualizations. Choosing a force-layout would require lots of interactions that constantly
+            needs to be calculated and a too large file size that includes too many nodes would definetly have an effect
+            on performance. In this case initial reducing of the dataset would be an option. Simply remove the number of
+            nodes. If you displayed a bar chart then the amount of datapoints may not be a problem for performance but would
+            quickly become a problem in terms of communication (wide barchart would be hard to dechipher). Again the solution
+            could be to reduce the dataset by creating larger bins. It would also be a good idea to do transformations on
+            the dataset before serving it to D3 to reduce load.
         </p>
     </div>
 
