@@ -42,7 +42,7 @@ function temperatureChange() {
     // set the dimensions and margins of the graph
 
     var svg = d3.select(".multiLine svg"),
-        margin = { top: 20, right: 20, bottom: 100, left: 50 },
+        margin = { top: 20, right: 50, bottom: 100, left: 50 },
         width = +svg.attr("width") - margin.left - margin.right,
         height = +svg.attr("height") - margin.top - margin.bottom,
         g = svg.append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
@@ -86,7 +86,7 @@ function temperatureChange() {
                 .attr("y", 0)
                 .attr("x", 10)
                 .attr("dy", ".35em")
-                .attr("transform", "rotate(90)")
+                .attr("transform", "rotate(45)")
                 .style("text-anchor", "start");
 
             // Append the y-axis
