@@ -71,45 +71,57 @@
 </head>
 
 <body>
+<div style="margin: auto;
+    width: 80%;
+    border: 1px solid black;
+    padding: 10px;">
     <h1>Project 2 - Temperature Data</h1>
     <h2>Introduction</h2>
-    In this assignment we want to answer the question: <i>How has the weather changed over the past 100 years?</i>.
-    <br/> To answer this question we will use temperature data for Copenhagen, Denmark provided by the <a href="http://data.giss.nasa.gov/gistemp/station_data/">NASA</a>.
+    <p>
+        In this assignment we want to answer the question: <i>How has the weather changed over the past 100 years?</i>.
+        <br/> To answer this question we will use temperature data for Copenhagen, Denmark provided by the <a href="http://data.giss.nasa.gov/gistemp/station_data/">NASA</a>.
+    </p>
 
     <h2>Visualization</h2>
-    To investigate how the weather has changed over the past 100 years, we will do 2 different visualization using D3.<br/>    The first plot is a bar plot of how the average temperatures each year has changed in celsius.<br/> The Bar chart doesn't
-    show the temperatures per month, and if we are dealing with high changes when it is winter and summer we could find out
-    that the cold months are getting colder, and the warm months are getting warmer.<br/> The second plot is therefor a multi
-    line plot of how the average temperatures each month has changed for each year in celsius.
-    <br/> The multi line plot is created by adapting our data to an existing visualization we found online.
-    <br/> (
-    <a href="https://bl.ocks.org/d3noob/4db972df5d7efc7d611255d1cc6f3c4f">
-        https://bl.ocks.org/d3noob/4db972df5d7efc7d611255d1cc6f3c4f</a>)
-
-    <h3>Bar plot</h3>
-    <div class="barChart">
-        <svg width="1800" height="500"></svg>
         <p>
-            Yellow indicates that the year's temperature is above the average temperature since 1880 till 2015.
-            <br> Blue indicates that the year's temperature is below the average temperature since 1880 till 2015.
+            To investigate how the weather has changed over the past 100 years, we will do 2 different visualization using D3.<br/>
+            The first plot is a barplot of how the average temperatures each year has changed in celsius.
+            <br/>
+            The Bar chart doesn't show the temperatures per month, and if we are dealing with high changes when it is winter and summer we could find out
+            that the cold months are getting colder, and the warm months are getting warmer.<br/> The second plot is therefor a multilineplot
+            of how the average temperatures each month has changed for each year in celsius.
+            <br/>
+            The multilineplot is created by adapting our data to an existing visualization we found online.
+            <br/>
+            (<a href="https://bl.ocks.org/d3noob/4db972df5d7efc7d611255d1cc6f3c4f">
+            https://bl.ocks.org/d3noob/4db972df5d7efc7d611255d1cc6f3c4f</a>)
         </p>
-    </div>
 
-    <h3>Multi line plot</h3>
-    <div class="multiLine">
-        <svg width="600" height="600"></svg>
-    </div>
-    <p>The multiline plot has been used to show temperatures for each month from the year 1880 to 2015. Each line represents
-        a year. Each line has been given a color on a d3 color scheme that goes from blue, the year 1880, to yellow, the
-        year 2015. This was to illustrate a likely correlation of the year and rise in temperature. </p>
-
-    <!-- Results here-->
-
-    <div style="width: 600px;">
-        <h2>Conclusion</h2>
         <h3>Bar plot</h3>
+        <div class="barChart">
+            <svg width="1500" height="500"></svg>
+            <p>
+                Yellow indicates that the year's temperature is above the average temperature since 1880 till 2015.
+                <br> Blue indicates that the year's temperature is below the average temperature since 1880 till 2015.
+            </p>
+        </div>
+
+        <h3>Multilineplot</h3>
+        <div class="multiLine">
+            <svg width="1024" height="600"></svg>
+        </div>
         <p>
-            The bar plot gives a good overview on how the overall changes in temperature per year has changed. There are a general pattern
+            The multiline plot has been used to show temperatures for each month from the year 1880 to 2015. Each line represents
+            a year. Each line has been given a color on a d3 color scheme that goes from blue, the year 1880, to yellow, the
+            year 2015. This was to illustrate a likely correlation of the year and rise in temperature.
+        </p>
+
+        <!-- Results here-->
+
+        <h2>Conclusion</h2>
+        <h3>Barplot</h3>
+        <p>
+            The barplot gives a good overview on how the overall changes in temperature per year has changed. There are a general pattern
             of increasing temperatures, however it is hard to tell if the changes are more significant, since maybe the cold
             months are getting colder and the warm months are getting warmer.
         </p>
@@ -127,20 +139,38 @@
         <h3>Question 1</h3>
         <small>Theis Jakobsen</small>
         <p>
-            From the data plottet in the bar-plot we can visually infer that there is a rise in temperature over last decade. This is
+            From the data plottet in the barplot we can visually infer that there is a rise in temperature over last decade. This is
             alone only clearly visible due to the color categorization of the bars. It is however not clearly visible if
             there is a gradual rise in temperature over the last century. A dataset containing a distance to a mean temperature
             before a certain date would make it easier to determine temperature shifts. Such a dataset, ofcourse, could be
             obtained by transforming the current dataset. Errors on each temperature measurement would also be welcome. Right
             now the multiline plot is very cluttered. It's hard to see differences between the years that have been plotted.
-            Using the same method, as describe before, for the multine and the barplot would improve it's message.
+            Using the same method, as describe before, for the multiline and the barplot would improve it's message.
         </p>
         <h3>Question 2</h3>
-        <small>Christian Grüner</small>
+        <small>Christian Gr&uuml;ner</small>
         <p>
-            I have chosen to answer the question: <i>Which dynamic elements or interactions could improve your article?</i>
-            <br/> The visualization we have created are all static, and holds a lot of information, and categories. To make
-            a create a better overview and easily readable visualization I have some ideas for both of the visualizations.
+            The visualization we have created are all static, and holds a lot of information, and categories. To make
+            a better overview and easily readable visualization I have some ideas for the two visualizations we have made.
+
+            <ol>
+                <li>
+                    <b>Barplot.</b><br/>
+                    It is hard to make the bar plot smaller in terms of categories. However an improvement to the bar plot,
+                    could be to be able to choose a certain month, which then gives an overview for all the categories.
+                    Another improvement would be to let the viewer select if he wants to see the result as an average or
+                    as a change in temperatures using a bias. A third improvement would be to let the viewer select which years
+                    he want to compare, this will also make the plot much smaller and easier to read.
+                </li>
+                <li>
+                    <b>Multilineplot.</b><br/>
+                    Make it possible to let the viewer select if he wants to compare the average or the change in temperatures
+                    using a bias. Another option would be to select which years to compare and then change the colors indicating
+                    the year to match the selected years.
+                </li>
+
+            </ol>
+
         </p>
         <h3>Question 3</h3>
         <small>Theis Jakobsen</small>
