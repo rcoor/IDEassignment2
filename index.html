@@ -2,12 +2,20 @@
 <html>
 
 <head>
-    <!--<script src="https://d3js.org/d3.v4.min.js"></script>-->
-    <script src="./node_modules/d3/build/d3.min.js"></script>
+    <script src="https://d3js.org/d3.v4.min.js"></script>
+    <!--<script src="./node_modules/d3/build/d3.min.js"></script>-->
     <script src="script.js"></script>
     <title>Interactive Data Visualization - Project 2</title>
 
     <style>
+        small {
+            color: rgba(0, 0, 0, 0.6);
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
         .axis--x path {
             display: none;
         }
@@ -20,7 +28,7 @@
         .line:hover {
             stroke: lightslategrey !important;
             z-index: 99;
-             stroke-width: 2.5px;
+            stroke-width: 2.5px;
         }
 
         .bar {
@@ -66,19 +74,16 @@
     <h1>Project 2 - Temperature Data</h1>
     <h2>Introduction</h2>
     In this assignment we want to answer the question: <i>How has the weather changed over the past 100 years?</i>.
-    <br/>
-    To answer this question we will use temperature data for Copenhagen, Denmark provided by the <a href="http://data.giss.nasa.gov/gistemp/station_data/">NASA</a>.
+    <br/> To answer this question we will use temperature data for Copenhagen, Denmark provided by the <a href="http://data.giss.nasa.gov/gistemp/station_data/">NASA</a>.
 
     <h2>Visualization</h2>
-    To investigate how the weather has changed over the past 100 years, we will do 2 different visualization using D3.<br/>
-    The first plot is a bar plot of how the average temperatures each year has changed in celsius.<br/>
-    The Bar chart doesn't show the temperatures per month, and if we are dealing with high changes when it is winter and summer we could
-    find out that the cold months are getting colder, and the warm months are getting warmer.<br/>
-    The second plot is therefor a multi line plot of how the average temperatures each month has changed for each year in celsius.
-    <br/>
-    The multi line plot is created by adapting our data to an existing visualization we found online.
-    <br/>
-    (<a href="https://bl.ocks.org/d3noob/4db972df5d7efc7d611255d1cc6f3c4f">
+    To investigate how the weather has changed over the past 100 years, we will do 2 different visualization using D3.<br/>    The first plot is a bar plot of how the average temperatures each year has changed in celsius.<br/> The Bar chart doesn't
+    show the temperatures per month, and if we are dealing with high changes when it is winter and summer we could find out
+    that the cold months are getting colder, and the warm months are getting warmer.<br/> The second plot is therefor a multi
+    line plot of how the average temperatures each month has changed for each year in celsius.
+    <br/> The multi line plot is created by adapting our data to an existing visualization we found online.
+    <br/> (
+    <a href="https://bl.ocks.org/d3noob/4db972df5d7efc7d611255d1cc6f3c4f">
         https://bl.ocks.org/d3noob/4db972df5d7efc7d611255d1cc6f3c4f</a>)
 
     <h3>Bar plot</h3>
@@ -86,15 +91,14 @@
         <svg width="1800" height="500"></svg>
         <p>
             Yellow indicates that the year's temperature is above the average temperature since 1880 till 2015.
-            <br>
-            Blue indicates that the year's temperature is below the average temperature since 1880 till 2015.
+            <br> Blue indicates that the year's temperature is below the average temperature since 1880 till 2015.
         </p>
     </div>
 
     <!-- Results here-->
-    The bar plot gives a good overview on how the overall changes in temperature per year has changed.
-    There are a general pattern of increasing temperatures, however it is hard to tell if the changes are more significant,
-    since maybe the cold months are getting colder and the warm months are getting warmer.
+    The bar plot gives a good overview on how the overall changes in temperature per year has changed. There are a general pattern
+    of increasing temperatures, however it is hard to tell if the changes are more significant, since maybe the cold months
+    are getting colder and the warm months are getting warmer.
 
     <h3>Multi line plot</h3>
     <div class="multiLine">
@@ -106,18 +110,31 @@
 
     <!-- Results here-->
 
-    <h2>Conclusion</h2>
+    <div style="width: 600px;">
+        <h2>Conclusion</h2>
 
-    <h2>Individual part</h2>
-    <b>Christian</b>
-    <p>
-        I have chosen to answer the question: <i>Which dynamic elements or interactions could improve your article?</i>
-        <br/>
-        The visualization we have created are all static, and holds a lot of information, and categories. To make a
-        create a better overview and easily readable visualization I have some ideas for both of the visualizations.
+        <h2>Individual part</h2>
+        <br>
+        <h3>Question 1</h3>
+        <small>Theis Jakobsen</small>
+        <p>
+            From the data plottet in the bar-plot we can visually infer that there is a rise in temperature over last decade. This is
+            alone only clearly visible due to the color categorization of the bars. It is however not clearly visible if
+            there is a gradual rise in temperature over the last century. A dataset containing a distance to a mean temperature before a certain date would make it easier to determine
+        </p>
+        <h3>Question 2</h3>
+        <small>Christian Grüner</small>
+        <p>
+            I have chosen to answer the question: <i>Which dynamic elements or interactions could improve your article?</i>
+            <br/> The visualization we have created are all static, and holds a lot of information, and categories. To make
+            a create a better overview and easily readable visualization I have some ideas for both of the visualizations.
+        </p>
+        <h3>Question 3</h3>
+        <small>Theis Jakobsen</small>
+        <p>
 
-    </p>
-
+        </p>
+    </div>
 
 </body>
 
